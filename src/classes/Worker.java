@@ -47,6 +47,7 @@ public class Worker {
 	private static String resultString;
 	
 	private static List<SISserver> districtNodes;
+	private static String urls;
 
 	public static void main(String[] args) {
 		resultWindow();
@@ -68,9 +69,9 @@ public class Worker {
 
 		parseHTML(coolerURL);
 		Collections.sort(districtNodes);
-		printAllURLs();
+		generateResultText();
 		
-		resultString = "insert node url here";
+		resultString = urls;
 		resultText.setText(resultString);
 		resultFrame.setVisible(true);
 		resultFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -79,15 +80,16 @@ public class Worker {
 
 	}
 	
-	public static void printAllURLs (){
+	public static void generateResultText (){
+		StringBuilder sb = new StringBuilder();
 		for(SISserver sis : districtNodes){
 			if(sis.getServerstring().contains("wrxx")){
-				System.out.println("http://"+ sis.getServerstring()+".fsc.follett.com:8080/aspen/logon.do?deploymentId=" + sis.getDeploymentID());
+				sb.append("http://"+ sis.getServerstring()+".fsc.follett.com:8080/aspen/logon.do?deploymentId=" + sis.getDeploymentID() + "\n");
 			} else {
-				System.out.println("http://"+ sis.getServerstring()+".fss.follett.com:8080/aspen/logon.do?deploymentId=" + sis.getDeploymentID());
+				sb.append("http://"+ sis.getServerstring()+".fss.follett.com:8080/aspen/logon.do?deploymentId=" + sis.getDeploymentID() + "\n");
 			}
-
 		}
+		urls = sb.toString();
 	}
 	
 	public static void parseHTML(String input) {
