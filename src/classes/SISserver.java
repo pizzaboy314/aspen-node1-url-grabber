@@ -28,6 +28,6 @@ public class SISserver implements Comparable<Object> {
 	
 	@Override
 	public int compareTo(Object o) {
-		return (this.deploymentID.substring(3)).compareTo(((SISserver) o).getDeploymentID().substring(3));
+		return (this.deploymentID).compareTo(((SISserver) o).getDeploymentID());
 	}
 }
